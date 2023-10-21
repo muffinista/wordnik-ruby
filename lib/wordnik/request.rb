@@ -1,6 +1,8 @@
+# coding: utf-8
 module Wordnik
 
   class Request
+    require 'erb'
     require 'uri'
     require 'addressable/uri'
     require 'typhoeus'
@@ -69,7 +71,6 @@ module Wordnik
 
       # Obfuscate API key?
       u.sub! /api\_key=\w+/, 'api_key=YOUR_API_KEY' if options[:obfuscated]
-
       u
     end
 
@@ -80,7 +81,8 @@ module Wordnik
 
       # Fill in the path params
       self.params.each_pair do |key, value|
-        p = p.gsub("{#{key}}", value.to_s)
+        value = ::ERB::Util.url_encode(value)
+        p = p.gsub("{#{key}}", value)
       end
 
       # Stick a .{format} placeholder into the path if there isn't
@@ -91,8 +93,8 @@ module Wordnik
       end
 
       p = p.sub("{format}", self.format.to_s)
-
-      URI.encode [Wordnik.configuration.base_path, p].join("/").gsub(/\/+/, '/')
+      
+      [Wordnik.configuration.base_path, p].join("/").gsub(/\/+/, '/')
     end
 
     # Massage the request body into a state of readiness

@@ -4,7 +4,7 @@ describe Wordnik::Response do
 
   before(:each) do
 
-    @raw = Typhoeus::Request.get("http://#{Wordnik.configuration.host}#{Wordnik.configuration.base_path}/word.json")
+    @raw = Typhoeus::Request.get("https://#{Wordnik.configuration.host}#{Wordnik.configuration.base_path}/word.json")
 
     @response = Wordnik::Response.new(@raw)
   end
@@ -27,7 +27,7 @@ describe Wordnik::Response do
 
   describe "unauthorized" do
     it "raises an error when initialized" do
-      @unauthorized_raw = Typhoeus::Request.get("http://#{Wordnik.configuration.host}#{Wordnik.configuration.base_path}/word.json/dog/images/flickr")
+      @unauthorized_raw = Typhoeus::Request.get("https://#{Wordnik.configuration.host}#{Wordnik.configuration.base_path}/word.json/dog/images/flickr")
       expect { Wordnik::Response.new(@unauthorized_raw) }.to raise_error(ClientError)
     end
   end
@@ -40,7 +40,7 @@ describe Wordnik::Response do
     end
 
     it "recognizes xml" do
-      @raw = Typhoeus::Request.get("http://#{Wordnik.configuration.host}#{Wordnik.configuration.base_path}/word.xml")
+      @raw = Typhoeus::Request.get("https://#{Wordnik.configuration.host}#{Wordnik.configuration.base_path}/word.xml")
       @response = Wordnik::Response.new(@raw)
       @response.format.should == 'xml'
       @response.xml?.should == true
@@ -62,7 +62,7 @@ describe Wordnik::Response do
     end
 
     it "has a pretty xml body" do
-      @raw = Typhoeus::Request.get("http://#{Wordnik.configuration.host}#{Wordnik.configuration.base_path}/word.xml")
+      @raw = Typhoeus::Request.get("https://#{Wordnik.configuration.host}#{Wordnik.configuration.base_path}/word.xml")
       @response = Wordnik::Response.new(@raw)
       @response.pretty_body.should =~ /\?xml/
     end

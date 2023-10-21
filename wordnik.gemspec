@@ -14,20 +14,20 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = "wordnik"
 
-  s.add_dependency 'typhoeus', '>=0.2.1'
+  s.add_dependency 'typhoeus', '>=1.4.0'
   s.add_dependency 'htmlentities', '>=4.2.4'
   s.add_dependency 'addressable', '>=2.2.4'
-  s.add_dependency 'nokogiri', '>=1.4.4'
+  s.add_dependency 'nokogiri', '>=1.15.4'
   s.add_dependency 'activemodel', '>=3.0.3'
-  s.add_dependency 'json', '>=1.4.6'
+  s.add_dependency 'json', '>=2.6.3'
 
-  s.add_development_dependency 'rspec', '~> 2.8.0'
-  s.add_development_dependency 'vcr', '~> 1.11.3'
-  s.add_development_dependency 'webmock', '>=1.6.2'
+  s.add_development_dependency 'rspec', '~> 3.12.0'
+  s.add_development_dependency 'vcr', '~> 6.2.0'
+  s.add_development_dependency 'webmock', '>=3.19.1'
   s.add_development_dependency 'autotest'
   s.add_development_dependency 'autotest-rails-pure'
   s.add_development_dependency 'rake'
-  s.add_development_dependency 'ruby-prof'
+#  s.add_development_dependency 'ruby-prof'
 
   s.files         = [
     `git ls-files`,
